@@ -19,14 +19,33 @@ app = Flask(__name__, static_folder="static")
 def index():
     return app.send_static_file("index.html")
 
-@app.route("/favicon.ico")
+@app.route("/manifest.json")
+def manifest():
+    return app.send_static_file('manifest.json')
+
+@app.route("/favicon")
 def favicon():
     return app.send_static_file('favicon.ico')
+
+@app.route("/android-icon-192x192.png")
+def android_icon_192():
+    return app.send_static_file('android-icon-192x192.png')
+
+@app.route("/favicon-32x32.png")
+def favicon_32():
+    return app.send_static_file('favicon-32x32.png')
+
+@app.route("/favicon-16x16.png")
+def favicon_16():
+    return app.send_static_file('favicon-16x16.png')
+
+@app.route("/favicon-96x96.png")
+def favicon_96():
+    return app.send_static_file('favicon-96x96.png')
 
 @app.route("/assets/<path:path>")
 def assets(path):
     return send_from_directory("static/assets", path)
-
 
 # ACS Integration Settings
 AZURE_SEARCH_SERVICE = os.environ.get("AZURE_SEARCH_SERVICE")
@@ -34,7 +53,7 @@ AZURE_SEARCH_INDEX = os.environ.get("AZURE_SEARCH_INDEX")
 AZURE_SEARCH_KEY = os.environ.get("AZURE_SEARCH_KEY")
 AZURE_SEARCH_USE_SEMANTIC_SEARCH = os.environ.get("AZURE_SEARCH_USE_SEMANTIC_SEARCH", "false")
 AZURE_SEARCH_SEMANTIC_SEARCH_CONFIG = os.environ.get("AZURE_SEARCH_SEMANTIC_SEARCH_CONFIG", "default")
-AZURE_SEARCH_TOP_K = os.environ.get("AZURE_SEARCH_TOP_K", 5)
+AZURE_SEARCH_TOP_K = os.environ.get("AZURE_SEARCH_TOP_K", 10)
 AZURE_SEARCH_ENABLE_IN_DOMAIN = os.environ.get("AZURE_SEARCH_ENABLE_IN_DOMAIN", "true")
 AZURE_SEARCH_CONTENT_COLUMNS = os.environ.get("AZURE_SEARCH_CONTENT_COLUMNS")
 AZURE_SEARCH_FILENAME_COLUMN = os.environ.get("AZURE_SEARCH_FILENAME_COLUMN")
@@ -592,7 +611,7 @@ def ensure_cosmos():
 
 def generate_title(conversation_messages):
     ## make sure the messages are sorted by _ts descending
-    title_prompt = 'Summarize the conversation so far into a 4-word or less title. Do not use any quotation marks or punctuation. Respond with a json object in the format {{"title": string}}. Do not include any other commentary or description.'
+    title_prompt = 'Summarize the conversation so far into a 4-word or less title. Do not use any quotation marks or punctuation. Respond with a json object in the format {{"title": string}}. Do not include any other commentary or description. Output in Norwegian language.'
 
     messages = [{'role': msg['role'], 'content': msg['content']} for msg in conversation_messages]
     messages.append({'role': 'user', 'content': title_prompt})

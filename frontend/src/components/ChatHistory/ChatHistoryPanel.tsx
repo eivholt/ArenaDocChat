@@ -36,9 +36,9 @@ export function ChatHistoryPanel(props: ChatHistoryPanelProps) {
 
     const clearAllDialogContentProps = {
         type: DialogType.close,
-        title: !clearingError? 'Are you sure you want to clear all chat history?' : 'Error deleting all of chat history',
+        title: !clearingError? 'Sikker på at du vil slette historikk?' : 'Feil ved sletting av historikk',
         closeButtonAriaLabel: 'Close',
-        subText: !clearingError ? 'All chat history will be permanently removed.' : 'Please try again. If the problem persists, please contact the site administrator.',
+        subText: !clearingError ? 'All chat-historikk vil bli slettet.' : 'Prøv på nytt.',
     };
     
     const modalProps = {
@@ -49,7 +49,7 @@ export function ChatHistoryPanel(props: ChatHistoryPanelProps) {
     }
 
     const menuItems: IContextualMenuItem[] = [
-        { key: 'clearAll', text: 'Clear all chat history', iconProps: { iconName: 'Delete' }},
+        { key: 'clearAll', text: 'Slett historikk', iconProps: { iconName: 'Delete' }},
     ];
 
     const handleHistoryClick = () => {
@@ -88,13 +88,13 @@ export function ChatHistoryPanel(props: ChatHistoryPanelProps) {
         <section className={styles.container} data-is-scrollable aria-label={"chat history panel"}>
             <Stack horizontal horizontalAlign='space-between' verticalAlign='center' wrap aria-label="chat history header">
                 <StackItem>
-                    <Text role="heading" aria-level={2} style={{ alignSelf: "center", fontWeight: "600", fontSize: "18px", marginRight: "auto", paddingLeft: "20px" }}>Chat history</Text>
+                    <Text role="heading" aria-level={2} style={{ alignSelf: "center", fontWeight: "600", fontSize: "18px", marginRight: "auto", paddingLeft: "20px" }}>Historikk</Text>
                 </StackItem>
                 <Stack verticalAlign="start">
                     <Stack horizontal styles={commandBarButtonStyle}>
                         <CommandBarButton
                             iconProps={{ iconName: 'More' }}
-                            title={"Clear all chat history"}
+                            title={"Slett historikk"}
                             onClick={onShowContextualMenu}
                             aria-label={"clear all chat history"}
                             styles={commandBarStyle}
@@ -110,7 +110,7 @@ export function ChatHistoryPanel(props: ChatHistoryPanelProps) {
                         />
                         <CommandBarButton
                             iconProps={{ iconName: 'Cancel' }}
-                            title={"Hide"}
+                            title={"Skjul"}
                             onClick={handleHistoryClick}
                             aria-label={"hide button"}
                             styles={commandBarStyle}
@@ -144,13 +144,13 @@ export function ChatHistoryPanel(props: ChatHistoryPanelProps) {
                                 <StackItem>
                                     <Text style={{ alignSelf: 'center', fontWeight: '400', fontSize: 16 }}>
                                         {appStateContext?.state.isCosmosDBAvailable?.status && <span>{appStateContext?.state.isCosmosDBAvailable?.status}</span>}
-                                        {!appStateContext?.state.isCosmosDBAvailable?.status && <span>Error loading chat history</span>}
+                                        {!appStateContext?.state.isCosmosDBAvailable?.status && <span>Feil ved lasting av historikk</span>}
                                         
                                     </Text>
                                 </StackItem>
                                 <StackItem>
                                     <Text style={{ alignSelf: 'center', fontWeight: '400', fontSize: 14 }}>
-                                        <span>Chat history can't be saved at this time</span>
+                                        <span>Historikk kan ikke lagres for øyeblikket</span>
                                     </Text>
                                 </StackItem>
                             </Stack>
@@ -164,7 +164,7 @@ export function ChatHistoryPanel(props: ChatHistoryPanelProps) {
                                 </StackItem>
                                 <StackItem>
                                     <Text style={{ alignSelf: 'center', fontWeight: '400', fontSize: 14 }}>
-                                        <span style={{ whiteSpace: 'pre-wrap' }}>Loading chat history</span>
+                                        <span style={{ whiteSpace: 'pre-wrap' }}>Henter historikk</span>
                                     </Text>
                                 </StackItem>
                             </Stack>
@@ -179,8 +179,8 @@ export function ChatHistoryPanel(props: ChatHistoryPanelProps) {
                 modalProps={modalProps}
             >
                 <DialogFooter>
-                {!clearingError && <PrimaryButton onClick={onClearAllChatHistory} disabled={clearing} text="Clear All" />}
-                <DefaultButton onClick={onHideClearAllDialog} disabled={clearing} text={!clearingError ? "Cancel" : "Close"} />
+                {!clearingError && <PrimaryButton onClick={onClearAllChatHistory} disabled={clearing} text="Tøm" />}
+                <DefaultButton onClick={onHideClearAllDialog} disabled={clearing} text={!clearingError ? "Avbryt" : "Lukk"} />
                 </DialogFooter>
             </Dialog>
         </section>
