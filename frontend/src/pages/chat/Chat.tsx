@@ -555,7 +555,8 @@ const Chat = () => {
                                     aria-hidden="true"
                                 />
                                 <h1 className={styles.chatEmptyStateTitle}>Hva lurer du på?</h1>
-                                <h2 className={styles.chatEmptyStateSubtitle}>Denne chatboten kan svare på spørsmål om hvordan du kan bruke Arena.</h2>
+                                <h2 className={styles.chatEmptyStateSubtitle}>Denne chatboten svarer på spørsmål om hvordan man bruker Arena.</h2>
+                                <h2 className={styles.chatEmptyStateSubtitle}>Svarene er basert på <a href="https://docs.dips.no/arena-23-1/user/">Arena brukerdokumentasjon</a> versjon 23.1.0, 2023-02-23</h2>
                             </Stack>
                         ) : (
                             <div className={styles.chatMessageStream} style={{ marginBottom: isLoading ? "40px" : "0px"}} role="log">
